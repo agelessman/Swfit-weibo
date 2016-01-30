@@ -605,54 +605,57 @@ class TWAPIRespose: NSObject,YYModel {
                         let tweet = self.tweets![tid!] as? TWTweet
                         if tweet != nil { timelineItemsArray.addObject(tweet!)}
                     }
+                    
+                }else {
+                   
+                    let cDic = (dic as! NSDictionary)["conversation"] as? NSDictionary
+                    if let _ = cDic {
+                        
+                        let conversation: TWConversation = TWConversation.modelWithDictionary(cDic! as [NSObject : AnyObject])
+                        
+                        let entityID = (dic as! NSDictionary)["entity_id"] as? NSDictionary
+                       
+                        if let _ = entityID {
+                            
+                            let ids = (entityID! )["ids"] as? NSArray
+                            
+                            if let _ = ids {
+                                
+                                conversation.entityIDs = ids
+                            }
+                        }
+                        
+                        let tweets = NSMutableArray()
+                        
+                        for tid in conversation.contextIDs! as! [String] {
+                            
+                            let tweet = self.tweets![tid] as? TWTweet
+                            if let _ = tweet { tweets.addObject(tweet!)}
+                        }
+                        
+                        if tweets.count > 1 {
+                            conversation.tweets = tweets
+                            timelineItemsArray.addObject(conversation)
+                        }
+                    }
+                }
+            }
+            
+            self.timelineItmes = timelineItemsArray
+        }
+        
+        for temp in self.timelineItmes! {
+            
+            if let _ = temp as? TWTweet { self.updateTweetReference(temp as? TWTweet) }
+            else if let _ = temp as? TWConversation {
+            
+                for tw in (temp as! TWConversation).tweets! {
+                    self.updateTweetReference(tw as? TWTweet)
                 }
             }
         }
-        
-//        for (NSDictionary *dic in _timeline) {
-//            NSDictionary *tDic = dic[@"tweet"];
-//            if ([tDic isKindOfClass:[NSDictionary class]]) {
-//                NSString *tid = tDic[@"id"];
-//                if ([tid isKindOfClass:[NSString class]]) {
-//                    T1Tweet *tweet = _tweets[tid];
-//                    if (tweet) [timelineItems addObject:tweet];
-//                }
-//            } else {
-//                NSDictionary *cDic = dic[@"conversation"];
-//                if ([cDic isKindOfClass:[NSDictionary class]]) {
-//                    T1Conversation *conversation = [T1Conversation modelWithDictionary:cDic];
-//                    
-//                    NSDictionary *entityID = dic[@"entity_id"];
-//                    if ([entityID isKindOfClass:[NSDictionary class]]) {
-//                        NSArray *ids = entityID[@"ids"];
-//                        if ([ids isKindOfClass:[NSArray class]]) {
-//                            conversation.entityIDs = ids;
-//                        }
-//                    }
-//                    
-//                    NSMutableArray *tweets = [NSMutableArray new];
-//                    for (NSString *tid in conversation.contextIDs) {
-//                        T1Tweet *tweet = _tweets[tid];
-//                        if (tweet) [tweets addObject:tweet];
-//                    }
-//                    if (tweets.count > 1) {
-//                        conversation.tweets = tweets;
-//                        [timelineItems addObject:conversation];
-//                    }
-//                }
-//            }
-//        }
-//        _timelineItmes = timelineItems;
-//        
-//        for (id item in _timelineItmes) {
-//            if ([item isKindOfClass:[T1Tweet class]]) {
-//                [self _updateTweetReference:item];
-//            } else if ([item isKindOfClass:[T1Conversation class]]) {
-//                for (T1Tweet *tweet in ((T1Conversation *)item).tweets) {
-//                    [self _updateTweetReference:tweet];
-//                }
-//            }
-//        }
+
+
         return true
     }
     

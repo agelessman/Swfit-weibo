@@ -13,7 +13,7 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
 
     var fpsLabel :MCFPSLabel!
     var tableView :UITableView!
-    let layouts :NSMutableArray = NSMutableArray()
+    var layouts :NSMutableArray = NSMutableArray()
     
     
     override func viewWillAppear(animated: Bool) {
@@ -73,13 +73,42 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
                             let layout: TWLayout = TWLayout()
                             layout.tweet = tweet
                             layouts.addObject(layout)
+                        }else if item.isKindOfClass(TWConversation.self){
+                            
+                            let conv = item as! TWConversation
+                            let convLayouts = NSMutableArray()
+                            
+                            for tw in conv.tweets! as! [TWTweet] {
+                                
+                                let la = TWLayout()
+                                la.conversation = conv
+                                la.tweet = tw
+                                convLayouts.addObject(la)
+                            }
+                            
+                            if conv.targetCount != nil && Float(conv.targetCount!) > 0 && convLayouts.count >= 2 {
+                                let laa = TWLayout()
+                                laa.conversation = conv
+                                laa .layout()
+                                convLayouts.insertObject(laa, atIndex: 1)
+                            }
+                            layouts.addObjectsFromArray(convLayouts as [AnyObject])
                         }
                     }
                 }
                 
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    
+                    self.title = "Tweet (loaded:\(layouts.count))"
+                    indicator.removeFromSuperview()
+                    self.navigationController?.view.userInteractionEnabled = true
+                    self.layouts = layouts
+                    self.tableView.reloadData()
+                })
+                
             }
             
-            print(layouts)
+            
         }
 
        
@@ -115,21 +144,25 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "dddd"
-        return cell
+        let cellId = "twcell"
+        var cell :TWeetCell? = tableView.dequeueReusableCellWithIdentifier(cellId) as? TWeetCell
+        if cell == nil {
+            cell = TWeetCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellId)
+//            cell?.delegate = self
+        }
+        return cell!
     }
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if self.layouts.count > 0 {
-            let layout = self.layouts[indexPath.row] as! WBStatusLayout
-            (cell as! WBStatusCell).setWithLayout(layout)
+            let layout = self.layouts[indexPath.row] as! TWLayout
+            (cell as! TWeetCell).bindLayout(layout)
         }
     }
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if self.layouts.count > 0 {
-            let layout = self.layouts[indexPath.row] as! WBStatusLayout
-            return CGFloat(layout.height!)
+            let layout = self.layouts[indexPath.row] as! TWLayout
+            return layout.height
         }else {
             return 0
         }
