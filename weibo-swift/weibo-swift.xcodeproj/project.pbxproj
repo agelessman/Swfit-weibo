@@ -51,7 +51,9 @@
 		9B80481F1C19CA80001D03F9 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B8048181C19CA80001D03F9 /* AFURLResponseSerialization.m */; };
 		9B8048201C19CA80001D03F9 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B80481A1C19CA80001D03F9 /* AFURLSessionManager.m */; };
 		9B81C3C21C18511900A7B826 /* MCModelExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B81C3C11C18511900A7B826 /* MCModelExample.swift */; };
+
 		9B82EA261C5B3BA30067DFDA /* TWLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B82EA251C5B3BA30067DFDA /* TWLayout.swift */; };
+
 		9B85BF1B1C51CC6F00FEB679 /* WBStatusComposeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85BF1A1C51CC6F00FEB679 /* WBStatusComposeController.swift */; };
 		9B85BF1D1C51DD0C00FEB679 /* WBStatusComposeTextParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B85BF1C1C51DD0C00FEB679 /* WBStatusComposeTextParser.swift */; };
 		9B8874011C59F2FA009CC1D2 /* twitter_0.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B8873FD1C59F2FA009CC1D2 /* twitter_0.json */; };
@@ -59,7 +61,10 @@
 		9B8874031C59F2FA009CC1D2 /* twitter_2.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B8873FF1C59F2FA009CC1D2 /* twitter_2.json */; };
 		9B8874041C59F2FA009CC1D2 /* twitter_3.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B8874001C59F2FA009CC1D2 /* twitter_3.json */; };
 		9B8874061C59F415009CC1D2 /* TWHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8874051C59F415009CC1D2 /* TWHelper.swift */; };
+
 		9B8874081C5A00B6009CC1D2 /* TWModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B8874071C5A00B6009CC1D2 /* TWModel.swift */; };
+
+
 		9B9152E41C1FECBE00A3AE5B /* ZSDPaymentForm.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9152DE1C1FECBE00A3AE5B /* ZSDPaymentForm.m */; };
 		9B9152E51C1FECBE00A3AE5B /* ZSDPaymentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B9152E01C1FECBE00A3AE5B /* ZSDPaymentView.m */; };
 		9B9152E61C1FECBE00A3AE5B /* ZSDPaymentView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B9152E11C1FECBE00A3AE5B /* ZSDPaymentView.xib */; };
@@ -310,7 +315,9 @@
 		9B80481A1C19CA80001D03F9 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		9B8048241C19CD84001D03F9 /* weibo-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "weibo-Header.h"; sourceTree = "<group>"; };
 		9B81C3C11C18511900A7B826 /* MCModelExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCModelExample.swift; sourceTree = "<group>"; };
+
 		9B82EA251C5B3BA30067DFDA /* TWLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWLayout.swift; sourceTree = "<group>"; };
+
 		9B85BF1A1C51CC6F00FEB679 /* WBStatusComposeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WBStatusComposeController.swift; sourceTree = "<group>"; };
 		9B85BF1C1C51DD0C00FEB679 /* WBStatusComposeTextParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WBStatusComposeTextParser.swift; sourceTree = "<group>"; };
 		9B8873FD1C59F2FA009CC1D2 /* twitter_0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_0.json; sourceTree = "<group>"; };
@@ -318,7 +325,9 @@
 		9B8873FF1C59F2FA009CC1D2 /* twitter_2.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_2.json; sourceTree = "<group>"; };
 		9B8874001C59F2FA009CC1D2 /* twitter_3.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = twitter_3.json; sourceTree = "<group>"; };
 		9B8874051C59F415009CC1D2 /* TWHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWHelper.swift; sourceTree = "<group>"; };
+
 		9B8874071C5A00B6009CC1D2 /* TWModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWModel.swift; sourceTree = "<group>"; };
+
 		9B9152DD1C1FECBE00A3AE5B /* ZSDPaymentForm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSDPaymentForm.h; sourceTree = "<group>"; };
 		9B9152DE1C1FECBE00A3AE5B /* ZSDPaymentForm.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZSDPaymentForm.m; sourceTree = "<group>"; };
 		9B9152DF1C1FECBE00A3AE5B /* ZSDPaymentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZSDPaymentView.h; sourceTree = "<group>"; };
@@ -1372,9 +1381,13 @@
 			children = (
 				9B8873FC1C59F2FA009CC1D2 /* Api dump */,
 				9BD898131C30FC2F0002C416 /* T1HomeTimelineItemsViewController.swift */,
+
 				9B82EA251C5B3BA30067DFDA /* TWLayout.swift */,
 				9B8874051C59F415009CC1D2 /* TWHelper.swift */,
 				9B8874071C5A00B6009CC1D2 /* TWModel.swift */,
+
+				9B8874051C59F415009CC1D2 /* TWHelper.swift */,
+
 			);
 			path = Twitter;
 			sourceTree = "<group>";
@@ -1670,7 +1683,9 @@
 				9B2301B51C170667002EBF76 /* AppDelegate.swift in Sources */,
 				9B80481F1C19CA80001D03F9 /* AFURLResponseSerialization.m in Sources */,
 				9BD331E81C1ACC8F008C9557 /* MCSignViewModel.swift in Sources */,
+
 				9B82EA261C5B3BA30067DFDA /* TWLayout.swift in Sources */,
+
 				9BD519B81C4245A900F57EED /* NSObject+YYAddForKVO.m in Sources */,
 				9BD519F81C4245A900F57EED /* YYReachability.m in Sources */,
 				9BD4FA891C297AC6007B9D33 /* MCTextAttributeExampleController.swift in Sources */,
@@ -1702,7 +1717,10 @@
 				9BD519D71C4245A900F57EED /* YYImage.m in Sources */,
 				9BD519B41C4245A900F57EED /* NSNotificationCenter+YYAdd.m in Sources */,
 				9BD519BC1C4245A900F57EED /* CALayer+YYAdd.m in Sources */,
+
 				9B8874081C5A00B6009CC1D2 /* TWModel.swift in Sources */,
+
+
 				9BD519FA1C4245A900F57EED /* YYThreadSafeArray.m in Sources */,
 				9B66C7571C2939F500F4CB66 /* MCWebImageExampleCell.swift in Sources */,
 				9BD519E31C4245A900F57EED /* YYTextKeyboardManager.m in Sources */,

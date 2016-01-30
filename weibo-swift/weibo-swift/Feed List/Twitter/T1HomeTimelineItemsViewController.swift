@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     var fpsLabel :MCFPSLabel!
@@ -25,10 +26,13 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
         super.viewDidLoad()
 
         self.view.backgroundColor = UIColor(white:1.000, alpha: 0.919)
+
+
         if self.respondsToSelector("setAutomaticallyAdjustsScrollViewInsets:")
         {
             self.automaticallyAdjustsScrollViewInsets = false
         }
+
         
         self.initFPSLabel()
         self.initTableView()
@@ -77,6 +81,7 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
             
             print(layouts)
         }
+
        
     }
 
@@ -175,4 +180,5 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
                 }, completion: nil)
         }
     }
+
 }

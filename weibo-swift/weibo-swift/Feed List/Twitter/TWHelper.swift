@@ -117,6 +117,7 @@ extension TWHelper {
         }
         
     }
+
     
     //MARK: ------- 缩短数量描述，  ---------
     class func shortedNumberDesc(number :Int) -> String
@@ -143,4 +144,5 @@ extension TWHelper {
         }
         return String(format: "%.1fB", Float(number) / 1000.0 / 1000.0 / 1000.0)
     }
+
 }
