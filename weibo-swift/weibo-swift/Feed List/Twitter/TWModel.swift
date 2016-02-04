@@ -49,7 +49,9 @@ class TWURL: NSObject,YYModel {
             if i == 0 { self.range = range}
             if rangeCount > 1 { rangesArray.addObject(NSValue(range: range))}
         }
-        self.ranges = rangesArray
+        
+        //控制，设置ranges 为空或者有数据
+        self.ranges = rangesArray.count > 0 ? rangesArray : nil
      
         return true
     }
@@ -518,6 +520,11 @@ class TWTweet: NSObject,YYModel {
             "urls" : "entities.urls",
             "hashTags" : "entities.hashtags"
         ]
+    }
+    func modelCustomTransformFromDictionary(dic: [NSObject : AnyObject]!) -> Bool {
+        
+    
+        return true
     }
 }
 

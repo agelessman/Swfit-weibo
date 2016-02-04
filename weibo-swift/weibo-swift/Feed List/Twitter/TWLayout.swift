@@ -84,14 +84,14 @@ let kTWTextActionFavoriteColor = UIColor(hexString: "FAB81E")
     var showConversationTopJoin    = false
     var showConversationBottomJoin = false
     
-    var socialTextLayout: YYTextLayout!
+    var socialTextLayout: YYTextLayout?
     var nameTextLayout: YYTextLayout!
     var dateTextLayout: YYTextLayout!
-    var textLayout: YYTextLayout!
+    var textLayout: YYTextLayout?
     var quotedNameTextLayout: YYTextLayout!
-    var quotedTextLayout: YYTextLayout!
-    var retweetCountTextLayout: YYTextLayout!
-    var favoriteCountTextLayout: YYTextLayout!
+    var quotedTextLayout: YYTextLayout?
+    var retweetCountTextLayout: YYTextLayout?
+    var favoriteCountTextLayout: YYTextLayout?
     
     var images: NSArray?
     var displayedTweet: TWTweet {
@@ -209,11 +209,137 @@ let kTWTextActionFavoriteColor = UIColor(hexString: "FAB81E")
         }
         
         
+        let textContainer = YYTextContainer(size: CGSizeMake(kTWContentWidth + 2 * kTWTextContainerInset, 100000))
+        textContainer.insets = UIEdgeInsetsMake(0, kTWTextContainerInset, 0, kTWTextContainerInset)
         
+        self.textLayout = YYTextLayout(container: textContainer, text: self.textForTweet(tw))
+      
+        if tw.medias != nil {
+            
+        }
         
+        if tw.extendedMedias != nil {
+            
+        }
         
+        if tw.medias?.count > 0 || tw.extendedMedias?.count > 0 {
         
-        self.height = 40
+            let images = NSMutableArray()
+            let imageIDs = NSMutableArray()
+//             print(tw.medias)
+            if tw.medias != nil && tw.medias!.count > 0 {
+                
+                for media in tw.medias! as! [TWMedia] {
+                    
+                    if media.type == "photo" {
+                        
+                        if media.mediaSmall != nil && media.mediaLarge != nil {
+                            
+                            if media.midStr != nil && !imageIDs.containsObject(media.midStr!) {
+                                
+                                images.addObject(media)
+                                imageIDs.addObject(media.midStr!)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            if tw.extendedMedias != nil && tw.extendedMedias!.count > 0 {
+                
+                for media in tw.extendedMedias! as! [TWMedia] {
+                    
+                    if media.type == "photo" {
+                        
+                        if media.mediaSmall != nil && media.mediaLarge != nil {
+                            
+                            if media.midStr != nil && !imageIDs.containsObject(media.midStr!) {
+                                
+                                images.addObject(media)
+                                imageIDs.addObject(media.midStr!)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            while images.count > 4 {
+            
+                images.removeLastObject()
+            }
+            
+            if images.count > 0 {
+                
+                self.images = images
+            }
+        }
+        
+        if self.images == nil && tw.retweetedStatus == nil && tw.quotedStatus != nil {
+            
+            let quote = tw.quotedStatus!
+            
+            let nameText = NSMutableAttributedString(string: quote.user?.name != nil ? quote.user!.name! : "")
+            nameText.font = nameFont
+            nameText.color = kTWUserNameColor
+            
+            if quote.user?.screenName != nil {
+                
+                let screenNameText = NSMutableAttributedString(string: quote.user!.screenName!)
+                screenNameText.color = kTWUserNameSubColor
+                screenNameText.font = nameSubFont
+                screenNameText.insertString(" @", atIndex: 0)
+                
+                nameText.appendAttributedString(screenNameText)
+            }
+            
+            nameText.lineBreakMode = NSLineBreakMode.ByCharWrapping
+            
+            let nameContainer = YYTextContainer(size: CGSizeMake(kTWQuoteContentWidth, kTWUserNameFontSize * 2))
+            nameContainer.maximumNumberOfRows = 1
+            self.quotedNameTextLayout = YYTextLayout(container: nameContainer, text: nameText)
+            
+            
+            let quoteText = self.textForTweet(quote)
+            self.quotedTextLayout = YYTextLayout(containerSize: CGSizeMake(kTWQuoteContentWidth, 10000), text: quoteText)
+            
+            
+        }
+      
+       self.retweetCountTextLayout = self.retweetCountTextLayoutForTweet(tw)
+       self.favoriteCountTextLayout = self.favoriteCountTextLayoutForTweet(tw)
+     
+        if self.socialTextLayout != nil  {
+            self.paddingTop = kTWCellExtendedPadding
+        } else {
+            self.paddingTop = kTWCellPadding
+        }
+        
+        self.textTop = self.paddingTop + kTWUserNameFontSize + kTWCellInnerPadding
+        self.textHeight = self.textLayout != nil ? (CGRectGetMaxY(self.textLayout!.textBoundingRect)) : 0
+         self.quoteTop = self.textTop + self.textHeight + kTWCellInnerPadding
+        self.imagesTop = self.quoteTop
+        if (self.images != nil) {
+            self.imagesHeight = kTWContentWidth * (9.0 / 16.0)
+        } else if (self.quotedTextLayout != nil) {
+            self.quoteHeight = 2 * kTWCellPadding + kTWUserNameFontSize + CGRectGetMaxY(self.quotedTextLayout!.textBoundingRect)
+        }
+        
+        var  height: CGFloat = 0
+        if (self.imagesHeight > 0) {
+            height = self.imagesTop + self.imagesHeight
+        } else if (self.quoteHeight > 0) {
+            height = self.quoteTop + self.quoteHeight
+        } else {
+            height = self.textTop + self.textHeight
+        }
+        height += kTWActionsHeight
+        if (height < self.paddingTop + kTWAvatarSize) {
+            height = self.paddingTop + kTWAvatarSize
+        }
+        height += kTWCellExtendedPadding
+        
+      
+        self.height = height
     }
     
     
@@ -243,4 +369,140 @@ let kTWTextActionFavoriteColor = UIColor(hexString: "FAB81E")
         self.images = nil
     }
 
+    
+    func textForTweet(tweet: TWTweet) -> NSAttributedString? {
+        
+        if tweet.text == nil { return nil }
+        
+        let text = NSMutableAttributedString(string: tweet.text!)
+        text.font = UIFont.systemFontOfSize(kTWTextFontSize)
+        text.color = kTWTextColor
+
+        if let _ = tweet.urls {
+            
+            for url in tweet.urls! as! [TWURL] {
+                
+                if url.ranges != nil {
+                    
+                    for value in url.ranges! as! [NSValue] {
+                        
+                        self.setHighlightInfo(["TWURL" : url], withRange: value.rangeValue, toText: text)
+                    }
+                }else{
+                    
+                    self.setHighlightInfo(["TWURL" : url], withRange: url.range!, toText: text)
+                }
+            }
+        }
+  
+        if let _ = tweet.medias {
+            
+            for media in tweet.medias! as! [TWMedia] {
+                
+                if media.ranges != nil {
+                    
+                    for value in media.ranges! as! [NSValue] {
+                        
+                        self.setHighlightInfo(["TWMedia" : media], withRange: value.rangeValue, toText: text)
+                    }
+                }else{
+                    
+                    self.setHighlightInfo(["TWMedia" : media], withRange: media.range!, toText: text)
+                }
+            }
+        }
+
+        
+        if let _ = tweet.extendedMedias {
+            
+            for media in tweet.extendedMedias! as! [TWMedia] {
+                
+                if media.ranges != nil {
+                    
+                    for value in media.ranges! as! [NSValue] {
+                        
+                        self.setHighlightInfo(["TWMedia" : media], withRange: value.rangeValue, toText: text)
+                    }
+                }else{
+                    
+                    self.setHighlightInfo(["TWMedia" : media], withRange: media.range!, toText: text)
+                }
+            }
+        }
+
+        
+        return text;
+    }
+    
+    func setHighlightInfo(info: NSDictionary, var withRange range: NSRange , toText text: NSMutableAttributedString) {
+        
+        if range.length == 0 || text.length == 0 { return }
+        
+        let str = text.string
+        var start = range.location
+        var end = range.length + start
+        
+        var i = 0
+        for unit in str.utf16 {
+            
+            i++
+            //在 Unicode 编码中这段是一个没有码点的值，过滤
+            if 0xD800 <= unit && unit <= 0xDBFF {
+                
+                if start > i { start++ }
+                if end > i { end++ }
+            }
+        }
+        
+        if end <= start { return }
+        range = NSMakeRange(start, end - start)
+        
+        if range.location >= text.length { return }
+        if range.location + range.length > text.length { return }
+        
+        let border = YYTextBorder()
+        border.cornerRadius = 3
+        border.insets = UIEdgeInsetsMake(-2, -2, -2, -2)
+        border.fillColor = kTWTextHighlightedBackgroundColor
+ 
+        let highlight = YYTextHighlight()
+        highlight.setBackgroundBorder(border)
+        highlight.userInfo = info as [NSObject : AnyObject]
+        
+        text.setTextHighlight(highlight, range: range)
+        text.setColor(kTWTextHighlightedColor, range: range)
+
+    }
+    
+    func retweetCountTextLayoutForTweet(tw: TWTweet) -> YYTextLayout? {
+        
+        if tw.retweetCount != nil && Int(tw.retweetCount!) > 0 {
+            
+            let retweet = NSMutableAttributedString(string: TWHelper.shortedNumberDesc(Int(tw.retweetCount!)!))
+            retweet.font = UIFont.systemFontOfSize(kTWActionFontSize)
+            retweet.color = tw.retweeted == "1" ? kTWTextActionRetweetColor : kTWTextActionsColor
+            
+            return YYTextLayout(containerSize: CGSizeMake(100, kTWActionFontSize * 2), text: retweet)
+        }
+        
+        return nil
+ 
+        
+    }
+    
+    func favoriteCountTextLayoutForTweet(tw: TWTweet) -> YYTextLayout? {
+        
+        if tw.favoriteCount != nil && Int(tw.favoriteCount!) > 0 {
+            
+            let favourite = NSMutableAttributedString(string: TWHelper.shortedNumberDesc(Int(tw.favoriteCount!)!))
+            favourite.font = UIFont.systemFontOfSize(kTWActionFontSize)
+            favourite.color = tw.favorited == "1" ? kTWTextActionFavoriteColor : kTWTextActionsColor
+            
+            return YYTextLayout(containerSize: CGSizeMake(100, kTWActionFontSize * 2), text: favourite)
+        }
+        
+        return nil
+        
+        
+    }
 }

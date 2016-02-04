@@ -112,6 +112,9 @@
 		9BD085941C2AD344001496D0 /* dribbble256_imageio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD085901C2AD344001496D0 /* dribbble256_imageio.png */; };
 		9BD085951C2AD344001496D0 /* dribbble512_imageio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD085911C2AD344001496D0 /* dribbble512_imageio.png */; };
 		9BD085971C2AD697001496D0 /* EmoticonQQ.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 9BD085961C2AD697001496D0 /* EmoticonQQ.bundle */; };
+		9BD1F8731C634B2400304EBA /* TWStatusInlineActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1F8721C634B2400304EBA /* TWStatusInlineActionsView.swift */; };
+		9BD1F8751C635AE500304EBA /* TWStatusMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1F8741C635AE500304EBA /* TWStatusMediaView.swift */; };
+		9BD1F8771C6367E900304EBA /* TWStatusQuoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD1F8761C6367E900304EBA /* TWStatusQuoteView.swift */; };
 		9BD331E01C1AB4CA008C9557 /* RequestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD331DF1C1AB4CA008C9557 /* RequestClient.swift */; };
 		9BD331E21C1ABE0F008C9557 /* RequestApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD331E11C1ABE0F008C9557 /* RequestApi.swift */; };
 		9BD331E51C1ACC6C008C9557 /* MCSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD331E41C1ACC6C008C9557 /* MCSignController.swift */; };
@@ -388,6 +391,9 @@
 		9BD085901C2AD344001496D0 /* dribbble256_imageio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dribbble256_imageio.png; sourceTree = "<group>"; };
 		9BD085911C2AD344001496D0 /* dribbble512_imageio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dribbble512_imageio.png; sourceTree = "<group>"; };
 		9BD085961C2AD697001496D0 /* EmoticonQQ.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = EmoticonQQ.bundle; sourceTree = "<group>"; };
+		9BD1F8721C634B2400304EBA /* TWStatusInlineActionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWStatusInlineActionsView.swift; sourceTree = "<group>"; };
+		9BD1F8741C635AE500304EBA /* TWStatusMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWStatusMediaView.swift; sourceTree = "<group>"; };
+		9BD1F8761C6367E900304EBA /* TWStatusQuoteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWStatusQuoteView.swift; sourceTree = "<group>"; };
 		9BD331DF1C1AB4CA008C9557 /* RequestClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestClient.swift; sourceTree = "<group>"; };
 		9BD331E11C1ABE0F008C9557 /* RequestApi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestApi.swift; sourceTree = "<group>"; };
 		9BD331E41C1ACC6C008C9557 /* MCSignController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSignController.swift; sourceTree = "<group>"; };
@@ -1379,6 +1385,9 @@
 				9B82EA251C5B3BA30067DFDA /* TWLayout.swift */,
 				9B5899671C5C803A0096FAC6 /* TWeetCell.swift */,
 				9B5899691C5C87C90096FAC6 /* TWStatusView.swift */,
+				9BD1F8721C634B2400304EBA /* TWStatusInlineActionsView.swift */,
+				9BD1F8741C635AE500304EBA /* TWStatusMediaView.swift */,
+				9BD1F8761C6367E900304EBA /* TWStatusQuoteView.swift */,
 				9B8874071C5A00B6009CC1D2 /* TWModel.swift */,
 				9B8874051C59F415009CC1D2 /* TWHelper.swift */,
 			);
@@ -1593,6 +1602,7 @@
 				9BD519E41C4245A900F57EED /* YYTextLayout.m in Sources */,
 				9BD519D61C4245A900F57EED /* YYFrameImage.m in Sources */,
 				9BD519BD1C4245A900F57EED /* YYCGUtilities.m in Sources */,
+				9BD1F8771C6367E900304EBA /* TWStatusQuoteView.swift in Sources */,
 				9BD519DA1C4245A900F57EED /* YYSpriteSheetImage.m in Sources */,
 				9B9D62CF1C1EBFBF00E5669F /* MJFoundation.m in Sources */,
 				9BD519D01C4245A900F57EED /* _YYWebImageSetter.m in Sources */,
@@ -1620,6 +1630,7 @@
 				9BD766BC1C47A17E004BD56C /* UIImageView+WebCache.m in Sources */,
 				9BD766B51C47A17E004BD56C /* SDWebImageManager.m in Sources */,
 				9BD766AF1C47A17E004BD56C /* NSData+ImageContentType.m in Sources */,
+				9BD1F8731C634B2400304EBA /* TWStatusInlineActionsView.swift in Sources */,
 				9BD519C01C4245A900F57EED /* UIBezierPath+YYAdd.m in Sources */,
 				9B9152E41C1FECBE00A3AE5B /* ZSDPaymentForm.m in Sources */,
 				9BE814CE1C50B18400B22700 /* MCWebView.swift in Sources */,
@@ -1649,6 +1660,7 @@
 				9BD519FC1C4245A900F57EED /* YYTimer.m in Sources */,
 				9BF7503F1C449A79001CE860 /* WBStatusTagView.swift in Sources */,
 				9BD766B41C47A17E004BD56C /* SDWebImageDownloaderOperation.m in Sources */,
+				9BD1F8751C635AE500304EBA /* TWStatusMediaView.swift in Sources */,
 				9BD331F31C1AD448008C9557 /* MCSignInhttp.swift in Sources */,
 				9BD898141C30FC2F0002C416 /* T1HomeTimelineItemsViewController.swift in Sources */,
 				9BD519FD1C4245A900F57EED /* YYTransaction.m in Sources */,
