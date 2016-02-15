@@ -76,6 +76,7 @@ class YYControl: UIView {
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        if event == nil { return }
         self._longPressDetected = false
         if let _ = self.touchBlock {
             self.touchBlock!(view: self, state: YYGestureRecognizerState.Began, touches: touches as NSSet, even: event!)
@@ -92,6 +93,7 @@ class YYControl: UIView {
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        if event == nil { return }
         if self._longPressDetected! { return }
         if let _ = self.touchBlock {
             self.touchBlock!(view: self, state: YYGestureRecognizerState.Moved, touches: touches as NSSet, even: event!)
@@ -101,6 +103,7 @@ class YYControl: UIView {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
+        if event == nil { return }
         if self._longPressDetected! { return }
         if let _ = self.touchBlock {
             self.touchBlock!(view: self, state: YYGestureRecognizerState.Ended, touches: touches as NSSet, even: event!)
@@ -110,6 +113,8 @@ class YYControl: UIView {
     
     override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         
+        if touches == nil { return }
+        if event == nil { return }
         if self._longPressDetected! { return }
         if let _ = self.touchBlock {
             self.touchBlock!(view: self, state: YYGestureRecognizerState.Cancelled, touches: touches! as NSSet, even: event!)

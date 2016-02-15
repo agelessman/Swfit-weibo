@@ -9,7 +9,7 @@
 import UIKit
 
 
-class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,TWStatusCellDelegate {
 
     var fpsLabel :MCFPSLabel!
     var tableView :UITableView!
@@ -148,7 +148,7 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
         var cell :TWeetCell? = tableView.dequeueReusableCellWithIdentifier(cellId) as? TWeetCell
         if cell == nil {
             cell = TWeetCell(style: UITableViewCellStyle.Default, reuseIdentifier: cellId)
-//            cell?.delegate = self
+            cell!.delegate = self
         }
         return cell!
     }
@@ -213,5 +213,261 @@ class T1HomeTimelineItemsViewController: UIViewController,UITableViewDelegate,UI
                 }, completion: nil)
         }
     }
+    
+    
+    
+    //MARK: --------------  点击了头像的代理  ----------------
+    func cell(cell: TWeetCell, didClickAvatarWithLongPress longPress: Bool) {
+        
+        self.showMessage("点击了头像，该功能尚未开发！")
+        
+    }
+    
 
+    
+    //MARK:----------------  点击了自身的代理  ---------------
+    func cell(cell: TWeetCell, didClickContentWithLongPress longPress: Bool) {
+        
+        self.showMessage("点击了我，该功能尚未开发！")
+        
+    }
+    
+    
+    
+    //MARK: --------------- 点击了图片的代理 ------------------
+    func cell(cell: TWeetCell, didClickImageAtIndex index: Int, withLongPress longPress: Bool) {
+        
+        if (longPress) {
+            
+            let sheet = UIAlertController(title: "您长按了第\(index)张图片", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            
+            let action0 = UIAlertAction(title: "保存到相册", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                
+                print("保存到相册")
+                
+            })
+            
+            let action1 = UIAlertAction(title: "分享到朋友圈", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                
+                print("分享到朋友圈")
+                
+            })
+            
+            let action2 = UIAlertAction(title: "取消", style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+                
+                print("取消")
+                
+            })
+            
+            sheet.addAction(action0)
+            sheet.addAction(action1)
+            sheet.addAction(action2)
+            self.presentViewController(sheet, animated: true, completion: nil)
+            
+            return;
+        }
+        
+        var fromView: UIView!
+        let items = NSMutableArray()
+        let images: NSArray? = cell.layout.images
+        
+        if images?.count > 0 {
+            
+            for var i = 0 ,max = images!.count ; i < max ; i++ {
+                let imageView = cell.statusView.mediaView.imageViews[i]
+                let pic = images![i] as! TWMedia
+                let item = MCPhotoGroupItem()
+                item.thumbView = imageView as? UIView
+                item.largeImageURL = pic.mediaLarge!.url
+                item.largeImageSize = pic.mediaLarge!.size
+                items.addObject(item)
+                if i == index {
+                    fromView = imageView as! UIView
+                }
+            }
+        }
+        
+        let v = MCPhotoGroupView(items: items)
+        v.presentFromImageView(fromView!, toContainer: self.navigationController!.view, animated: true, completion: nil)
+    }
+
+    
+    
+    //MARK: --------------- 点击了quote --------------
+    func cell(cell: TWeetCell, didClickQuoteWithLongPress longPress: Bool) {
+        
+        self.showMessage("点击了quote，该功能尚未开发")
+        
+    }
+    
+    
+    //MARK: --------------- 点击了reply ---------------
+    func cellDidClickReply(cell: TWeetCell) {
+        
+    }
+    
+    
+    
+    //MARK: ---------------- 点击了转发 ----------------
+    func cellDidClickRetweet(cell: TWeetCell) {
+        
+        let layout = cell.layout
+        let tw = layout.displayedTweet
+        if tw.retweeted == "1" {
+            
+            tw.retweeted = "0"
+            if tw.retweetCount != nil && Int(tw.retweetCount!) > 0 {
+                
+                var tempCount = Int(tw.retweetCount!)!
+                tempCount--
+                tw.retweetCount = String(tempCount)
+            
+                layout.retweetCountTextLayout = layout.retweetCountTextLayoutForTweet(tw)
+            }
+            
+        }else {
+            
+            tw.retweeted = "1"
+            if tw.retweetCount != nil  {
+                
+                var tempCount = Int(tw.retweetCount!)!
+                tempCount++
+                tw.retweetCount = String(tempCount)
+                
+                layout.retweetCountTextLayout = layout.retweetCountTextLayoutForTweet(tw)
+            }
+            
+        }
+        
+        cell.statusView.inlineActionsView.updateRetweetWithAnimation()
+
+    }
+    
+    //MARK: ---------------- 点击了关注 ---------------
+    func cellDidClickFollow(cell: TWeetCell) {
+     
+        let layout = cell.layout
+        let tw = layout.displayedTweet
+        tw.user?.following = tw.user?.following == "1" ? "0" : "1"
+        cell.statusView.inlineActionsView.updateFollowWithAnimation()
+        
+    }
+    
+    
+    //MARK: --------------- 点击了赞 ---------------
+    func cellDidClickFavorite(cell: TWeetCell) {
+        
+        
+        let layout = cell.layout
+        let tw = layout.displayedTweet
+        if tw.favorited == "1" {
+            
+            tw.favorited = "0"
+            if tw.favoriteCount != nil && Int(tw.favoriteCount!) > 0 {
+                
+                var tempCount = Int(tw.favoriteCount!)!
+                tempCount--
+                tw.favoriteCount = String(tempCount)
+                
+                layout.favoriteCountTextLayout = layout.favoriteCountTextLayoutForTweet(tw)
+            }
+            
+        }else {
+            
+            tw.favorited = "1"
+            if tw.favoriteCount != nil  {
+                
+                var tempCount = Int(tw.favoriteCount!)!
+                tempCount++
+                tw.favoriteCount = String(tempCount)
+                
+                layout.favoriteCountTextLayout = layout.favoriteCountTextLayoutForTweet(tw)
+            }
+            
+        }
+        
+        cell.statusView.inlineActionsView.updateFavouriteWithAnimation()
+        
+    }
+    
+    
+    //MARK: --------------  点击了文本高亮  ------------------
+    func cell(cell: TWeetCell, didClickInLabel label: YYLabel, textRange: NSRange) {
+        
+        let highlight = label.textLayout.text.attribute(YYTextHighlightAttributeName, atIndex: UInt(textRange.location)) as? YYTextHighlight
+        
+        if let _ = highlight {
+            
+            let info = highlight!.userInfo as NSDictionary
+            
+            var link: NSURL?
+            var linkTitle: String?
+            
+            if let _ = info["TWURL"] {
+                
+                let url = info["TWURL"] as! TWURL
+                if url.expandedURL != nil {
+                    
+                    link = NSURL(string: url.expandedURL!)
+                    linkTitle = url.displayURL
+                }
+            }else if let _ = info["TWMedia"] {
+                
+                let media = info["TWMedia"] as! TWMedia
+                if media.expandedURL != nil {
+                    
+                    link = NSURL(string: media.expandedURL!)
+                    linkTitle = media.displayURL
+                }
+            }
+            
+            if let _ = link {
+                
+                let vc = YYSimpleWebViewController(WithUrl: link!)
+                vc.title = linkTitle
+                self.navigationController?.pushViewController(vc, animated: true)
+                
+            }
+        }
+
+        
+    }
+
+    //MARK: --------------   显示头部标签的的点击事件    ----------------
+    //弹窗显示提示
+    func showMessage(message :NSString)
+    {
+        let padding :CGFloat = 10.0
+        let label :YYLabel = YYLabel()
+        label.text = message as String
+        label.textAlignment = NSTextAlignment.Center
+        label.font = UIFont.systemFontOfSize(16.0)
+        label.textColor = UIColor.whiteColor()
+        label.backgroundColor = UIColor(red: 0.033, green: 0.685, blue: 0.978, alpha: 0.730)
+        label.width = self.view.width
+        label.textContainerInset = UIEdgeInsetsMake(padding, padding, padding, padding)
+        label.height = message.heightForFont(label.font, width: label.width) + 2 * padding
+        label.bottom = 64
+        
+        self.view.addSubview(label)
+        
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            
+            label.top = 64;
+            
+            }) { (finished) -> Void in
+                
+                UIView.animateWithDuration(0.2, delay: 2, options: UIViewAnimationOptions.CurveEaseInOut, animations: { () -> Void in
+                    
+                    label.bottom = 64
+                    
+                    }, completion: { (finished) -> Void in
+                        
+                        label.removeFromSuperview()
+                        
+                })
+        }
+    }
+    
+    
 }

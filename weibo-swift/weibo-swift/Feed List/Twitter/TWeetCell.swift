@@ -13,6 +13,7 @@ class TWeetCell: UITableViewCell {
  
     var statusView: TWStatusView!
     var layout: TWLayout!
+    var delegate: TWStatusCellDelegate?
     
     override  init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         

@@ -105,6 +105,7 @@
 		9BA5ECE21C27FEAC00CD2D42 /* niconiconi@2x.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9BA5ECE11C27FEAC00CD2D42 /* niconiconi@2x.gif */; };
 		9BA5ECE41C27FEB500CD2D42 /* pia@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BA5ECE31C27FEB500CD2D42 /* pia@2x.png */; };
 		9BA5ECEB1C28094600CD2D42 /* wall-e@2x.webp in Resources */ = {isa = PBXBuildFile; fileRef = 9BA5ECEA1C28094600CD2D42 /* wall-e@2x.webp */; };
+		9BCDE0E21C6596B7008CC7C2 /* TWStatusCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCDE0E11C6596B7008CC7C2 /* TWStatusCellDelegate.swift */; };
 		9BCDF2931C48C6C4007E8F3D /* YYSimpleWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCDF2921C48C6C4007E8F3D /* YYSimpleWebViewController.swift */; };
 		9BCDF2951C48E1A0007E8F3D /* MCPhotoGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BCDF2941C48E1A0007E8F3D /* MCPhotoGroupView.swift */; };
 		9BD085921C2AD344001496D0 /* dribbble64_imageio.png in Resources */ = {isa = PBXBuildFile; fileRef = 9BD0858E1C2AD344001496D0 /* dribbble64_imageio.png */; };
@@ -384,6 +385,7 @@
 		9BA5ECE11C27FEAC00CD2D42 /* niconiconi@2x.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "niconiconi@2x.gif"; sourceTree = "<group>"; };
 		9BA5ECE31C27FEB500CD2D42 /* pia@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pia@2x.png"; sourceTree = "<group>"; };
 		9BA5ECEA1C28094600CD2D42 /* wall-e@2x.webp */ = {isa = PBXFileReference; lastKnownFileType = file; path = "wall-e@2x.webp"; sourceTree = "<group>"; };
+		9BCDE0E11C6596B7008CC7C2 /* TWStatusCellDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TWStatusCellDelegate.swift; sourceTree = "<group>"; };
 		9BCDF2921C48C6C4007E8F3D /* YYSimpleWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YYSimpleWebViewController.swift; sourceTree = "<group>"; };
 		9BCDF2941C48E1A0007E8F3D /* MCPhotoGroupView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCPhotoGroupView.swift; sourceTree = "<group>"; };
 		9BD0858E1C2AD344001496D0 /* dribbble64_imageio.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dribbble64_imageio.png; sourceTree = "<group>"; };
@@ -1382,6 +1384,7 @@
 			children = (
 				9B8873FC1C59F2FA009CC1D2 /* Api dump */,
 				9BD898131C30FC2F0002C416 /* T1HomeTimelineItemsViewController.swift */,
+				9BCDE0E11C6596B7008CC7C2 /* TWStatusCellDelegate.swift */,
 				9B82EA251C5B3BA30067DFDA /* TWLayout.swift */,
 				9B5899671C5C803A0096FAC6 /* TWeetCell.swift */,
 				9B5899691C5C87C90096FAC6 /* TWStatusView.swift */,
@@ -1616,6 +1619,7 @@
 				9BD519C91C4245A900F57EED /* UITableView+YYAdd.m in Sources */,
 				9BFCA1731C43745900124EE5 /* WBStatusToolbarView.swift in Sources */,
 				9B1BBD451C40F08D007CD602 /* WBStatusProfileView.swift in Sources */,
+				9BCDE0E21C6596B7008CC7C2 /* TWStatusCellDelegate.swift in Sources */,
 				9BD519E61C4245A900F57EED /* YYTextMagnifier.m in Sources */,
 				9BD519E11C4245A900F57EED /* YYTextEffectWindow.m in Sources */,
 				9BD519D11C4245A900F57EED /* CALayer+YYWebImage.m in Sources */,

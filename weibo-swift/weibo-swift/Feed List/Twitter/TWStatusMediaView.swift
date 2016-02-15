@@ -54,6 +54,11 @@ class TWStatusMediaView: YYControl {
             if index != NSNotFound {
                 
                 //点击了图片
+                if self.cell.delegate != nil {
+                    
+                    self.cell.delegate!.cell(self.cell, didClickImageAtIndex: index!, withLongPress: false)
+                    
+                }
             }
         }
         
@@ -63,6 +68,11 @@ class TWStatusMediaView: YYControl {
             if index != NSNotFound {
                 
                 //图片长按
+                if self.cell.delegate != nil {
+                    
+                    self.cell.delegate!.cell(self.cell, didClickImageAtIndex: index!, withLongPress: true)
+                    
+                }
             }
         
         }

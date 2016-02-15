@@ -70,7 +70,12 @@ class TWStatusQuoteView: YYControl {
                 
                 if CGRectContainsPoint(self.bounds, p) {
                     
-                    //点击了图片
+                    if let _ = self.cell.delegate {
+                        
+                        self.cell.delegate!.cell(self.cell, didClickQuoteWithLongPress: false)
+                        
+                    }
+                    
                 }
                 
             }

@@ -270,6 +270,11 @@ class TWStatusView: YYControl {
 
         self.textLabel.highlightTapAction                  = { (containerView: UIView! , text: NSAttributedString! , range: NSRange! , rect: CGRect!) ->Void  in
 
+            if let _ = self.cell.delegate {
+                
+                self.cell.delegate!.cell(self.cell, didClickInLabel: self.textLabel, textRange: range)
+                
+            }
         }
    
         self.addSubview(self.textLabel)
@@ -290,6 +295,68 @@ class TWStatusView: YYControl {
         self.topLine.height = CGFloatFromPixel(1)
         self.topLine.backgroundColor = UIColor(white: 0.823, alpha: 1.000)
         self.addSubview(self.topLine)
+        
+        
+        
+        //设置自身的点击事件。
+        self.touchBlock = { (view :YYControl,  state :YYGestureRecognizerState, touches :NSSet , even :UIEvent ) -> Void in
+        
+            if state == YYGestureRecognizerState.Began {
+                
+                self.backgroundColor = kTWCellBGHighlightColor
+                
+            }else if state != YYGestureRecognizerState.Moved {
+                
+                self.backgroundColor = UIColor.clearColor()
+                
+            }
+            
+            if state == YYGestureRecognizerState.Ended {
+                
+                let touch = touches.anyObject()! as! UITouch
+                let p = touch.locationInView(self)
+                if CGRectContainsPoint(self.bounds, p) {
+                    
+                    if let _ = self.cell.delegate {
+                        
+                        self.cell.delegate!.cell(self.cell, didClickContentWithLongPress: false)
+                    }
+                    
+                }
+                
+            }
+            
+        }
+        
+        //设置头像的点击
+        self.avatarView.touchBlock = { (view :YYControl,  state :YYGestureRecognizerState, touches :NSSet , even :UIEvent ) -> Void in
+            
+            if state == YYGestureRecognizerState.Began {
+                
+                self.avatarView.alpha = 0.7
+                
+            }else if state != YYGestureRecognizerState.Moved {
+                
+                self.avatarView.alpha = 1.0
+                
+            }
+            
+            if state == YYGestureRecognizerState.Ended {
+                
+                let touch = touches.anyObject()! as! UITouch
+                let p = touch.locationInView(self)
+                if CGRectContainsPoint(self.bounds, p) {
+                    
+                    if let _ = self.cell.delegate {
+                        
+                        self.cell.delegate!.cell(self.cell, didClickAvatarWithLongPress: false)
+                    }
+                    
+                }
+                
+            }
+            
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {

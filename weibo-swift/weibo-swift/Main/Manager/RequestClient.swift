@@ -9,7 +9,8 @@
 import UIKit
 
 
-let onlineHttpApi:String = "http://mobile.7keyun.com"
+
+let onlineHttpApi:String = ""
 class RequestClient: AFHTTPSessionManager {
 
     static let sharedInstance = RequestClient(baseURL: NSURL())

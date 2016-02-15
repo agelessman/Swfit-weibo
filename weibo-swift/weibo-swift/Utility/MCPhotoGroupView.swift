@@ -23,7 +23,20 @@ class MCPhotoGroupItem: NSObject,NSCopying {
         get {
             if self.thumbView != nil && self.thumbView!.respondsToSelector("image") {
                 
-                return (self.thumbView as! YYControl).image
+                let type = self.thumbView as? UIImageView
+                if let _ = type {
+                    
+                    return (self.thumbView as! UIImageView).image
+                    
+                }
+                
+                let type1 = self.thumbView as? YYControl
+                if let _ = type1 {
+                    
+                    return (self.thumbView as! YYControl).image
+                    
+                }
+                
             }
             return nil
         }
